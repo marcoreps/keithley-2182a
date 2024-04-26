@@ -4,7 +4,7 @@ from datetime import datetime
 rm = pyvisa.ResourceManager()
 
 
-batchsize = 200
+batchsize = 1000
 
 
 my_instrument = rm.open_resource('ASRL/dev/ttyUSB0::INSTR',baud_rate=19200, data_bits=8,write_termination='\r',read_termination='\r',parity=Parity.none)
@@ -31,7 +31,7 @@ my_instrument.write(":SENSe:VOLTage:RANGe:AUTO off")
 #my_instrument.write(":DISPlay:ENABle off")
 my_instrument.write(":SENSe:VOLTage:LPASs OFF")
 my_instrument.write(":SENSe:VOLTage:DFILter:STATe OFF")
-my_instrument.write(":SYSTem:AZERo:STATe OFF")
+my_instrument.write(":SYSTem:AZERo:STATe ON")
 my_instrument.write(":SYSTem:FAZero:STATe ON")
 my_instrument.write(":SYSTem:LSYNc:STATe ON")
 

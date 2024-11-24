@@ -7,7 +7,7 @@ rm = pyvisa.ResourceManager()
 batchsize = 1000
 
 
-my_instrument = rm.open_resource('ASRL/dev/ttyUSB0::INSTR',baud_rate=19200, data_bits=8,write_termination='\r',read_termination='\r',parity=Parity.none)
+my_instrument = rm.open_resource('GPIB0::4::INSTR')
 my_instrument.timeout = 20000
 my_instrument.write("*RST")
 print(my_instrument.query("*IDN?"))
@@ -35,7 +35,7 @@ my_instrument.write(":SYSTem:AZERo:STATe ON")
 my_instrument.write(":SYSTem:FAZero:STATe ON")
 my_instrument.write(":SYSTem:LSYNc:STATe ON")
 
-my_instrument.write(":SENSe:VOLTage:NPLCycles 5")
+my_instrument.write(":SENSe:VOLTage:NPLCycles 1")
 
 #my_instrument.write(":Trigger:Source BUS")
 my_instrument.write(":Trigger:Delay 0")
@@ -48,7 +48,7 @@ my_instrument.write(":TRACe:FEED:CONTrol NEXT")
 my_instrument.write(":INITiate")
 
 timestr = time.strftime("%Y%m%d-%H%M%S_")
-with open('csv/'+timestr+'Keithley_2182a_short_NPLC5.csv', mode='w') as csv_file:
+with open('csv/'+timestr+'Keithley_2182a_short_NPLC1.csv', mode='w') as csv_file:
     fieldnames = ['2182a_volt']
     writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
     writer.writeheader()
